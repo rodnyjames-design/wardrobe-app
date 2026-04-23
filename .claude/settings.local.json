@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm -v)",
+      "Read(//usr/local/bin/**)",
+      "Read(//Users/rodnygarrido/.nvm/versions/**)",
+      "Bash(export PATH=\"/usr/local/bin:$PATH\")",
+      "Bash(npx -v)",
+      "Bash(npx --yes create-next-app@latest . --ts --eslint --tailwind --src-dir --app --turbopack --import-alias \"@/*\" --use-npm --yes)"
+    ]
+  }
+}
