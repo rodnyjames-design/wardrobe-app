@@ -1,5 +1,6 @@
 import Link from "next/link";
 
+import { buttonVariants } from "@/components/ui/button";
 import { createClient } from "@/lib/supabase/server";
 
 export default async function Home() {
@@ -34,13 +35,30 @@ export default async function Home() {
       </header>
 
       <main className="flex flex-1 items-center justify-center px-6 pb-24">
-        <div className="flex flex-col items-center gap-4 text-center">
+        <div className="flex flex-col items-center gap-6 text-center">
           <h1 className="font-serif text-4xl sm:text-5xl md:text-6xl font-normal tracking-tight text-foreground">
-            Wardrobe app — setup complete
+            Wardrobe
           </h1>
           <p className="font-serif italic text-base sm:text-lg text-foreground/70">
-            Ready for what comes next.
+            {user
+              ? "Welcome back."
+              : "A quiet place for the things you wear."}
           </p>
+          {user ? (
+            <Link
+              href="/wardrobe"
+              className={`${buttonVariants({ size: "lg" })} mt-2`}
+            >
+              Open your wardrobe →
+            </Link>
+          ) : (
+            <Link
+              href="/login"
+              className={`${buttonVariants({ size: "lg" })} mt-2`}
+            >
+              Sign in
+            </Link>
+          )}
         </div>
       </main>
     </div>
