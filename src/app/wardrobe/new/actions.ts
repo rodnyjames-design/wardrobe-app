@@ -54,13 +54,13 @@ export async function addGarment(formData: FormData) {
   let photoPath: string | null = null;
 
   if (photo instanceof File && photo.size > 0) {
-    // Vercel serverless functions cap the request body around 4.5 MB. Reject
-    // earlier with a friendly error rather than silently failing the upload.
-    const MAX_PHOTO_BYTES = 4 * 1024 * 1024;
+    // Matches the bucket's file_size_limit and the Server Actions bodySizeLimit
+    // in next.config.ts. Reject earlier with a friendly error.
+    const MAX_PHOTO_BYTES = 5 * 1024 * 1024;
     if (photo.size > MAX_PHOTO_BYTES) {
       redirect(
         `/wardrobe/new?error=${encodeURIComponent(
-          `Photo is too large (${(photo.size / 1024 / 1024).toFixed(1)} MB). Max is 4 MB — try a smaller photo or lower your iPhone Camera quality.`,
+          `Photo is too large (${(photo.size / 1024 / 1024).toFixed(1)} MB). Max is 5 MB — try a smaller photo or take a screenshot of it first.`,
         )}`,
       );
     }
