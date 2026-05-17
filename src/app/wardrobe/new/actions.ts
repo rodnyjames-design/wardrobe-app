@@ -54,6 +54,17 @@ export async function addGarment(formData: FormData) {
   let photoPath: string | null = null;
 
   if (photo instanceof File && photo.size > 0) {
+    // Vercel serverless functions cap the request body around 4.5 MB. Reject
+    // earlier with a friendly error rather than silently failing the upload.
+    const MAX_PHOTO_BYTES = 4 * 1024 * 1024;
+    if (photo.size > MAX_PHOTO_BYTES) {
+      redirect(
+        `/wardrobe/new?error=${encodeURIComponent(
+          `Photo is too large (${(photo.size / 1024 / 1024).toFixed(1)} MB). Max is 4 MB — try a smaller photo or lower your iPhone Camera quality.`,
+        )}`,
+      );
+    }
+
     const ext = extensionForMimeType(photo.type);
     photoPath = `${user.id}/${id}.${ext}`;
     const { error: uploadError } = await supabase.storage

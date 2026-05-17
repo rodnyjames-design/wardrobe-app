@@ -1,6 +1,7 @@
 import Link from "next/link";
 
-import { Button } from "@/components/ui/button";
+import { SubmitButton } from "@/components/submit-button";
+import { buttonVariants } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import {
@@ -46,7 +47,8 @@ export default async function NewGarmentPage({
             className="cursor-pointer file:mr-3 file:rounded file:border-0 file:bg-foreground/10 file:px-3 file:py-1 file:text-foreground"
           />
           <p className="text-xs text-foreground/50">
-            JPG, PNG, WebP, or HEIC — up to 5 MB.
+            JPG, PNG, WebP, or HEIC — up to 4 MB (newer iPhone photos may need
+            to be compressed first).
           </p>
         </div>
 
@@ -130,10 +132,10 @@ export default async function NewGarmentPage({
         ) : null}
 
         <div className="flex items-center gap-3">
-          <Button type="submit">Save garment</Button>
-          <Button type="reset" variant="ghost">
+          <SubmitButton pendingText="Saving…">Save garment</SubmitButton>
+          <button type="reset" className={buttonVariants({ variant: "ghost" })}>
             Clear
-          </Button>
+          </button>
         </div>
       </form>
     </main>

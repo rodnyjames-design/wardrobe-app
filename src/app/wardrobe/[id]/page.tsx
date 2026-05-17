@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
-import { Button } from "@/components/ui/button";
+import { SubmitButton } from "@/components/submit-button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import {
@@ -180,7 +180,7 @@ export default async function GarmentPage({
           ) : null}
 
           <div className="flex items-center gap-3 pt-2">
-            <Button type="submit">Save changes</Button>
+            <SubmitButton pendingText="Saving…">Save changes</SubmitButton>
           </div>
         </form>
       </div>
@@ -190,9 +190,9 @@ export default async function GarmentPage({
           Delete this garment permanently. Its photo will also be removed from
           storage.
         </p>
-        <Button type="submit" variant="destructive">
+        <SubmitButton variant="destructive" pendingText="Deleting…">
           Delete garment
-        </Button>
+        </SubmitButton>
       </form>
     </main>
   );
